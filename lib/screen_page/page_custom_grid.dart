@@ -1,177 +1,133 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+
 import 'detail_grid.dart';
 
-class PageCustomGrid extends StatefulWidget {
-  const PageCustomGrid({Key? key}) : super(key: key);
+class PageCustomeGrid extends StatefulWidget {
+  const PageCustomeGrid({super.key}) ;
 
   @override
-  State<PageCustomGrid> createState() => _PageCustomGridState();
+  State<PageCustomeGrid> createState() => _CustomeGridState();
 }
 
-class _PageCustomGridState extends State<PageCustomGrid> {
-  List<Map<String, dynamic>> items = [
+class _CustomeGridState extends State<PageCustomeGrid> {
+  List<Map<String, dynamic>> listMovie = [
     {
       'title': 'Rasuk2',
       'price': 'Rp. 45000',
-      'image': 'gambar/film1.jpeg',
+      'image': 'gambar/film1.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Get Merried2',
       'price': 'Rp. 45000',
-      'image': 'gambar/film2.jpeg',
+      'image': 'gambar/film2.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Nikah Yuk',
       'price': 'Rp. 50000',
-      'image': 'gambar/film3.jpeg',
+      'image': 'gambar/film3.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Wonderful word',
       'price': 'Rp. 45000',
-      'image': 'gambar/film4.jpeg',
+      'image': 'gambar/film4.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Beauty',
       'price': 'Rp. 45000',
-      'image': 'gambar/film5.jpeg',
+      'image': 'gambar/filmm5.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Saranjana',
       'price': 'Rp. 40000',
-      'image': 'gambar/film6.jpeg',
+      'image': 'gambar/film6.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Doctor Slump',
       'price': 'Rp. 45000',
-      'image': 'gambar/film7.jpeg',
+      'image': 'gambar/film7.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Boboiboy',
       'price': 'Rp. 30000',
-      'image': 'gambar/film8.jpeg',
+      'image': 'gambar/film8.jpeg', // Ubah dengan path gambar yang sesuai
     },
 
     {
       'title': 'Korea Action',
       'price': 'Rp. 35000',
-      'image': 'gambar/film11.jpeg',
+      'image': 'gambar/film11.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Dua Garis Biru',
       'price': 'Rp. 45000',
-      'image': 'gambar/film13.jpeg',
+      'image': 'gambar/film13.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Dua Garis Biru',
       'price': 'Rp. 50000',
-      'image': 'gambar/film14.jpeg',
+      'image': 'gambar/film14.jpeg', // Ubah dengan path gambar yang sesuai
     },
     {
       'title': 'Hotel del luna',
       'price': 'Rp. 60000',
-      'image': 'gambar/film15.jpeg',
+      'image': 'gambar/film15.jpeg', // Ubah dengan path gambar yang sesuai
     },
   ];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text("Custom Grid"),
         backgroundColor: Colors.green,
-        title: Text('Custom Grid'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0), // Menambahkan padding 8.0 ke semua sisi
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Jumlah kolom dalam grid
-            crossAxisSpacing: 8.0, // Jarak antara kolom
-            mainAxisSpacing: 8.0, // Jarak antara baris
-          ),
-          itemCount: items.length,
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              onTap: () {
-                // Tambahkan logika untuk menangani ketika item diklik
-                showToast(
-                  'Anda memilih ${items[index]['title']} dengan harga ${items[index]['price']}',
-                  context: context,
-                  axis: Axis.horizontal,
-                  alignment: Alignment.center,
-                  position: StyledToastPosition.bottom,
-                  toastHorizontalMargin: 28,
-                  fullWidth: true,
-                );
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
+      body: GridView.builder(
+        itemCount: listMovie.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DetailGrid(listMovie[index]),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
-                        child: Image.asset(
-                          items[index]['image'], // Path gambar dari data item
-                          fit: BoxFit.none, // Sesuaikan dengan ukuran asli
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridTile(
+                footer: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 1, color: Colors.black),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${listMovie[index]["title"]}", // Perubahan key
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Tambahkan logika untuk menangani ketika tombol ditekan
-                          showToast(
-                            'Anda memilih ${items[index]['title']} dengan harga ${items[index]['price']}',
-                            context: context,
-                            axis: Axis.horizontal,
-                            alignment: Alignment.center,
-                            position: StyledToastPosition.bottom,
-                            toastHorizontalMargin: 28,
-                            fullWidth: true,
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green, // Warna tombol hijau
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20), // Melengkungkan sudut
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              items[index]['title'], // Judul dari data item
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.black, // Warna teks hitam
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              items[index]['price'], // Harga dari data item
-                              style: TextStyle(
-                                color: Colors.black, // Warna teks hitam
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                      Text("${listMovie[index]["price"]}"), // Perubahan key
+                    ],
+                  ),
+                ),
+                child: Image.asset(
+                  listMovie[index]["image"], // Perubahan key
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

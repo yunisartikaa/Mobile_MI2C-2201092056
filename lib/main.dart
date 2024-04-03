@@ -1,6 +1,7 @@
 import 'package:cobaflutter/screen_page/latihan1.dart';
 import 'package:cobaflutter/screen_page/package_beranda.dart';
 import 'package:cobaflutter/screen_page/page_column.dart';
+import 'package:cobaflutter/screen_page/page_register_api.dart';
 import 'package:flutter/material.dart';
 
 void main() {
